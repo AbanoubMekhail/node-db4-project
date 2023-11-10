@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
     await knex.schema
         .createTable('recipes', table => {
-            table.increments('reipe_id')
+            table.increments('recipe_id')
             table.string('recipe_name', 200).notNullable().unique()    
         })
         .createTable('ingredients', table => {
@@ -17,10 +17,10 @@ exports.up = async function (knex) {
             table.increments('step_id')
             table.string('step_text', 200).notNullable()
             table.integer('step_number').notNullable()
-            table.integer('reipe_id')
+            table.integer('recipe_id')
             .unsigned()
             .notNullable()
-            .references('reipe_id')
+            .references('recipe_id')
             .inTable('recipes')
             .onDelete('RESTRICT')
             .onUpdate('RESTRICT')
